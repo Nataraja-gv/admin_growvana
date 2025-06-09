@@ -9,8 +9,8 @@ import { useSnackbar } from "notistack";
 const NavBarPage = () => {
   const [dropDown, setDropDown] = useState(false);
   const [loginOpen, setLoginOpen] = useState(false);
-  const {enqueueSnackbar}= useSnackbar()
-  const dispatch = useDispatch()
+  const { enqueueSnackbar } = useSnackbar();
+  const dispatch = useDispatch();
   const admin = useSelector((state) => state.user);
 
   const dropdownRef = useRef();
@@ -46,13 +46,13 @@ const NavBarPage = () => {
 
   return (
     <div className="w-full font-sans">
-      <div className="bg-white shadow px-6 flex flex-col items-center">
+      <div className="bg-green-200 px-6 flex flex-col items-center   shadow-[0_4px_6px_-1px_rgba(0,0,0,0.1)]">
         <div className="w-[90%] mx-auto flex items-center justify-between ">
           <div className="w-[100px]">
             <img
               src="https://freshcartdev.s3.eu-north-1.amazonaws.com/growvana_logo.png"
               alt="Growvana"
-              className="h-auto w-full"
+              className="h-[80px] w-full"
             />
           </div>
 

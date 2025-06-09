@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { adminProfile } from "../services/adminAuth/loginAuth";
 import { useEffect, useState } from "react";
 import { addUser } from "../utils/feature/userData";
+import SideBar from "./sidebar";
 
 const MainLayout = () => {
   const admin = useSelector((state) => state?.user);
@@ -45,9 +46,18 @@ const MainLayout = () => {
   }
 
   return (
-    <div>
+    <div className="h-screen flex flex-col">
       <NavBarPage />
-      <Outlet />
+
+      <div className="flex flex-1 overflow-hidden">
+        <div className="w-64 border-r overflow-y-auto">
+          <SideBar />
+        </div>
+
+        <main className="flex-1 overflow-y-auto bg-gray-50 p-4">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

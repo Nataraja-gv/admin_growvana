@@ -198,6 +198,7 @@ const AddProducts = () => {
     }
   };
 
+   
   return (
     <div className="flex  justify-center items-start mt-10 px-4">
       <div className="w-full   bg-white rounded-2xl shadow-xl p-8">
@@ -405,6 +406,58 @@ const AddProducts = () => {
               ))}
             </div>
           </div>
+
+
+          {isEdit && (
+            <div className="mb-6">
+              <label
+                htmlFor="status"
+                className="block mb-2 text-sm font-medium text-gray-700"
+              >
+                InStock
+              </label>
+              <div className="flex">
+                <div className="flex items-center me-4">
+                  <input
+                    id="status-active"
+                    type="radio"
+                    value="true"
+                    name="status"
+                    checked={productData?.inStock === true}
+                    onChange={(e) =>
+                      handleInputChange("inStock", e.target.value === "true")
+                    }
+                    className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500"
+                  />
+                  <label
+                    htmlFor="status-active"
+                    className="ms-2 text-sm font-medium text-gray-900"
+                  >
+                    Active
+                  </label>
+                </div>
+                <div className="flex items-center me-4">
+                  <input
+                    id="status-inactive"
+                    type="radio"
+                    value="false"
+                    name="status"
+                    checked={productData?.inStock === false}
+                    onChange={(e) =>
+                      handleInputChange("inStock", e.target.value === "true")
+                    }
+                    className="w-4 h-4 text-green-600 bg-gray-100 border-gray-300 focus:ring-green-500"
+                  />
+                  <label
+                    htmlFor="status-inactive"
+                    className="ms-2 text-sm font-medium text-gray-900"
+                  >
+                    Inactive
+                  </label>
+                </div>
+              </div>
+            </div>
+          )}
           <button
             type="submit"
             className="w-full bg-green-700 text-white py-2.5 rounded-lg font-medium hover:bg-green-900 transition"

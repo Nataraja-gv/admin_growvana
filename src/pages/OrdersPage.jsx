@@ -20,10 +20,12 @@ const OrdersPage = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [newStatus, setNewStatus] = useState("Processing");
   const [newPaymentStatus, setNewPaymentStatus] = useState("Pending");
+  const [user,setUser]= useState("");
 
   const handleStatusUpdate = (order) => {
     setSelectedOrder(order);
     setNewStatus(order.orderStatus);
+    setUser(order.userId._id)
     setModelOpen(true);
   };
   const { enqueueSnackbar } = useSnackbar();
@@ -60,6 +62,7 @@ const OrdersPage = () => {
       let data = {
         orderStatus: newStatus,
         orderId: selectedOrder?._id,
+        userId: user,
       };
 
       if (selectedOrder.paymentMethod === "COD") {

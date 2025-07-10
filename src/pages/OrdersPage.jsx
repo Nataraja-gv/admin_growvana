@@ -14,18 +14,30 @@ import {
 } from "lucide-react";
 import { useSnackbar } from "notistack";
 
+const Tab_values = [
+  { label: "Processing", value: "Processing" },
+  { label: "Shipped", value: "Shipped" },
+  { label: "Delivered", value: "Delivered" },
+  { label: "Cancelled", value: "Cancelled" },
+];
+
 const OrdersPage = () => {
   const [orders, setOrders] = useState([]);
   const [modelOpen, setModelOpen] = useState(false);
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [newStatus, setNewStatus] = useState("Processing");
   const [newPaymentStatus, setNewPaymentStatus] = useState("Pending");
-  const [user,setUser]= useState("");
+  const [user, setUser] = useState("");
+  const [selectedTab, setSelectedTab] = useState("Processing");
+
+  const handleTabChange = (value) => {
+    setSelectedTab(value);
+  };
 
   const handleStatusUpdate = (order) => {
     setSelectedOrder(order);
     setNewStatus(order.orderStatus);
-    setUser(order.userId._id)
+    setUser(order.userId._id);
     setModelOpen(true);
   };
   const { enqueueSnackbar } = useSnackbar();
@@ -33,14 +45,14 @@ const OrdersPage = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetchAllOrders();
+        const res = await fetchAllOrders(selectedTab);
         setOrders(res?.data || []);
       } catch (error) {
         console.error("Error fetching orders:", error?.message);
       }
     };
     fetchOrders();
-  }, [modelOpen]);
+  }, [modelOpen, selectedTab]);
 
   const statusIcon = (status) => {
     switch (status) {
@@ -83,6 +95,24 @@ const OrdersPage = () => {
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Your Orders</h1>
+
+       <div className="mb-8">
+        <div className="flex flex-wrap gap-3">
+          {Tab_values.map((tab) => (
+            <button
+              key={tab.value}
+              onClick={() => handleTabChange(tab.value)}
+              className={`px-5 py-2 rounded-full text-sm font-semibold transition cursor-pointer ${
+                tab.value === selectedTab
+                  ? "bg-green-600 text-white shadow-md"
+                  : "bg-gray-100 text-gray-800 hover:bg-gray-200"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
       {orders.length === 0 ? (
         <div className="text-center text-gray-600">No orders found.</div>
@@ -192,6 +222,8 @@ const OrdersPage = () => {
                       className={`flex items-center gap-2 font-semibold ${
                         order.orderStatus === "Processing"
                           ? "text-yellow-600"
+                          : order.orderStatus === "Cancelled"
+                          ? " text-red-600"
                           : "text-green-700"
                       }`}
                     >

@@ -1,13 +1,16 @@
 import { enqueueSnackbar } from "notistack";
 import axiosInstance from "../../utils/axiosInstance";
 
-export const fetchAllOrders = async () => {
+export const fetchAllOrders = async (orderStatus) => {
   const config = {
     method: "GET",
     maxBodyLength: Infinity,
     url: "/user/order/all",
     headers: {
       "Content-Type": "application/json",
+    },
+    params: {
+      orderStatus,
     },
   };
   try {
@@ -28,7 +31,7 @@ export const updateOrderStatus = async (data) => {
     headers: {
       "Content-Type": "application/json",
     },
-    data
+    data,
   };
   try {
     const res = await axiosInstance.request(config);

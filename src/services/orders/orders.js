@@ -23,6 +23,52 @@ export const fetchAllOrders = async (orderStatus) => {
   }
 };
 
+export const fetchAllOrdersInvoice = async (startDate, endDate) => {
+  const config = {
+    method: "GET",
+    maxBodyLength: Infinity,
+    url: "/dashboard/invoice/preview",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    params: {
+      startDate,
+      endDate,
+    },
+  };
+  try {
+    const res = await axiosInstance.request(config);
+    return res?.data;
+  } catch (error) {
+    enqueueSnackbar(error.response.data.message, {
+      variant: "error",
+    });
+  }
+};
+
+export const fetchAllOrdersSendInvoice = async (startDate, endDate) => {
+  const config = {
+    method: "GET",
+    maxBodyLength: Infinity,
+    url: "/dashboard/invoice/email",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    params: {
+      startDate,
+      endDate,
+    },
+  };
+  try {
+    const res = await axiosInstance.request(config);
+    return res?.data;
+  } catch (error) {
+    enqueueSnackbar(error.response.data.message, {
+      variant: "error",
+    });
+  }
+};
+
 export const updateOrderStatus = async (data) => {
   const config = {
     method: "PATCH",

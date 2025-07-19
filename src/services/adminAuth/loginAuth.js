@@ -21,7 +21,6 @@ export const LoginAuth = async (data) => {
   }
 };
 
-
 export const adminProfile = async () => {
   const config = {
     method: "GET",
@@ -41,7 +40,44 @@ export const adminProfile = async () => {
   }
 };
 
+export const allregisterUsers = async () => {
+  const config = {
+    method: "GET",
+    maxBodyLength: Infinity,
+    url: "/user/registered/users",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  try {
+    const res = await axiosInstance.request(config);
+    return res?.data;
+  } catch (error) {
+    enqueueSnackbar(error.response.data.message, {
+      variant: "error",
+    });
+  }
+};
 
+export const userGetChats = async (targetId) => {
+  const config = {
+    method: "GET",
+    maxBodyLength: Infinity,
+    url: "/user/admin/chat",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    params: {
+      targetId,
+    },
+  };
+  try {
+    const res = await axiosInstance.request(config);
+    return res?.data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
 
 export const adminLogout = async () => {
   const config = {
@@ -61,5 +97,3 @@ export const adminLogout = async () => {
     });
   }
 };
-
-

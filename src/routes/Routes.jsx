@@ -8,6 +8,7 @@ import ProductPage from "../pages/ProductPage";
 import OrdersPage from "../pages/OrdersPage";
 import AddCategory from "../sections/category/category";
 import AddProducts from "../sections/product/products";
+import ChatPage from "../pages/chat";
 
 const RoutesPage = () => {
   return (
@@ -24,6 +25,8 @@ const RoutesPage = () => {
           <Route path="products/edit/:id" element={<AddProducts />} />
           <Route path="products/add" element={<AddProducts />} />
           <Route path="orders" element={<OrdersPage />} />
+          <Route path="chat" element={<ChatPage />} />
+          <Route path="chat/:_id" element={<ChatPage />} />
 
           <Route path="*" element="No page" />
         </Route>

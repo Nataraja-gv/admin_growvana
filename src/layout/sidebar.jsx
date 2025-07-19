@@ -1,8 +1,8 @@
- import {
+import {
   ArrowDownUp,
   ChartColumnStacked,
   Database,
-  FileText,
+  MessageSquareText,
   LayoutDashboard,
 } from "lucide-react";
 import React from "react";
@@ -17,6 +17,7 @@ const SideBar = () => {
     { label: "Products", icon: Database, href: "/products" },
     { label: "Category", icon: ChartColumnStacked, href: "/categoryPage" },
     { label: "Orders", icon: ArrowDownUp, href: "/orders" },
+    { label: "Chat", icon: MessageSquareText, href: "/chat" },
   ];
 
   return (

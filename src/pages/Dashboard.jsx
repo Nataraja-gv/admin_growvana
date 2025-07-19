@@ -63,7 +63,7 @@ const Dashboard = () => {
   const handleExportPDF = async () => {
     try {
       const res = await fetchAllOrdersSendInvoice(valueStartDate, valueEndDate);
-      if (res?.data) {
+      if (res) {
         enqueueSnackbar("invoice sent successfully", {
           variant: "success",
         });
